@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+        <div id="ex1">
+            <h2>Exercises 1</h2>
+            <input type="text" id="input1" v-model="message">
+            <p>The value of the input is: {{ message }}</p>
+        </div>
+        <div id="ex3">
+            <h2>Exercises 3</h2>
+            <ul>
+                <li v-for="name in names" v-text="name"></li>
+            </ul>
+            <input type="text" id="input2">
+            <button id="button">Add Name</button>
+        </div>
+        <div id="ex4">
+            <h2>Exercises 4</h2>
+            <ul>
+                <li v-for="name in names" v-text="name"></li>
+            </ul>
+            <input type="text" id="input2" v-model="newName">
+            <button v-on:click="addName">Add Name</button>
+            <!-- Short hand -->
+            <!--             
+                <button @click="addName">Add Name</button>  
+            -->
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+    <script>
+        new Vue({
+            el: '#ex1',
+            data: {
+                message: 'Hello World'
+            }
+        })
+
+        var app3 = new Vue({
+            el: '#ex3',
+            data: {
+                names: ['Joe', 'Mary', 'Jane', 'Jack']
+
+            },
+            mounted() {
+                document.querySelector('#button').addEventListener('click', () => {
+                    let name = document.querySelector('#input2');
+
+                    app.names.push(name.value);
+                    name.value = '';
+                })
+            }
+        })
+
+        var app4 = new Vue({
+            el: '#ex4',
+            data: {
+                newName: '',
+                names: ['Joe', 'Mary', 'Jane', 'Jack']
+
+            },
+            methods: {
+                addName() {
+                    this.names.push(this.newName);
+                    this.newName = '';
+                }
+            }
+        })
+    </script>
+</body>
+</html>
